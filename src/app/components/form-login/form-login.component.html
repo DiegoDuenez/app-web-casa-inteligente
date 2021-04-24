@@ -1,0 +1,52 @@
+<app-nav-bar-top-sh></app-nav-bar-top-sh>
+
+<div class="container">
+    
+    <form class="login" [formGroup]="loginForm" (ngSubmit)="login()">
+      <div class="form-group">
+        <label for="inputAddress2">Email</label>
+        <input
+          autocomplete="off"
+          type="text"
+          class="form-control"
+          id="inputAddress2"
+          formControlName="email"
+          [class.is-invalid]="emailValidate"
+          
+        />
+      </div>
+      <div class="form-group">
+        <label for="inputPassword">Contraseña</label>
+        <input
+          autocomplete="off"
+          type="password"
+          class="form-control"
+          id="inputPassword"
+          formControlName="password"
+        [class.is-invalid]="passwordValidate"
+          
+        />
+      </div>
+      
+      <div class="form-group">
+        <button type="submit" class="btn btn-lg btn-block btn-inicio">
+          Iniciar sesion
+        </button>
+      </div>
+      
+      
+    </form>
+
+    <div class="cargando" align="center" *ngIf="spinner == true">
+      <div class="spinner-grow text-info" role="status">
+        <span class="sr-only">Loading...</span>
+      </div> &nbsp;
+      <div class="spinner-grow text-info" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>  &nbsp;
+      <div class="spinner-grow text-info" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+
+  </div>

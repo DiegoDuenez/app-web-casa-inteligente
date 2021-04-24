@@ -1,0 +1,17 @@
+
+<div class="container-fluid" *ngIf="idRol == 1">
+    <div class="row bg-light">
+        <a  class="col" href="#" routerLink="/registro">Registro</a>
+        <a class="col" href="#" routerLink="/micasa">Mi Casa</a>
+        <a class="col" href="#" routerLink="/usuarios">Usuarios</a>
+        <a class="col" href="#" routerLink="/perfil">Mi Perfil</a>
+    </div>
+</div>
+
+<div class="container-fluid" *ngIf="idRol != 1">
+    <div class="row bg-light">
+        <a class="col" href="#" routerLink="/micasa">Mi Casa</a>
+        <a class="col" href="#" routerLink="/usuarios">Usuarios</a>
+        <a class="col" href="#" routerLink="/perfil">Mi Perfil</a>
+    </div>
+</div>

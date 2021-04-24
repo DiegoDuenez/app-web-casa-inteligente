@@ -1,0 +1,36 @@
+<app-nav-bar-top-sh></app-nav-bar-top-sh>
+<app-nav-bar></app-nav-bar>
+
+<div class="alert alert-info" role="alert" *ngIf="alert == true">
+    El area/habitación se ha creado correctamente <a routerLink="/micasa" class="alert-link">ver areas</a>
+</div>
+
+<div class="container">
+    <form class="login" [formGroup]="areaForm" (ngSubmit)="createArea()" *ngIf="idRol == 1">
+        <div class="form-group">
+        <label for="inputAddress2">Registrar Area/Habitación</label>
+        <input
+            autocomplete="off"
+            type="text"
+            class="form-control"
+            id="inputAddress2"
+            autofocus
+            formControlName="nombre"
+            [class.is-invalid]="nombreValidate"
+        />
+        </div>
+        <div class="form-group">
+        <button type="submit" class="btn btn-lg btn-block btn-registrar">
+            Registrar
+        </button>
+        </div>
+
+    </form>
+
+    <div class="container bg-light ctn shadow rounded" *ngIf="idRol != 1">
+        <h4 class="text-secondary">No tienes acceso a esta acción</h4>
+    </div>
+
+</div>
+
+

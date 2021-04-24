@@ -1,0 +1,84 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    /*background-color: #333;*/
+    background-color: white;
+    border: 1px solid #010544d2;
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    color: #010544d2;
+    text-align: center;
+    padding: 14px 141px;
+    text-decoration: none;
+    border-right: 1px solid #010544d2;
+
+  }
+
+  div a {
+    display: block;
+    color: #010544d2;
+    text-align: center;
+    /*padding: 14px 141px;*/
+    text-decoration: none;
+    border-right: 1px solid #010544d2;
+  }
+
+  @media screen and (max-width: 620px){
+    div a{
+      border-bottom: 1px solid #010544d2;
+    }
+}
+
+  .titulo{
+    
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: xx-large;
+    color: white;
+    font-weight: bold;
+    margin-left: 20px;
+    display: inline-block;
+    vertical-align: bottom;
+  }
+  
+  /* Change the link color to #111 (black) on hover */
+  li a:hover {
+    background-color: #010544d2;
+    color: white;
+  }
+
+  div a:hover {
+    background-color: #010544d2;
+    color: white;
+  }
+ 
+
+.barra-top{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    height: 100px;
+    overflow: hidden;
+    background: linear-gradient(to right, #05c7c7d2, #010544d2);
+}
+
+.img-logo{
+    margin-left: 10px;
+    margin-top: 10px;
+    width: 80px;
+    height: 80px
+}
+
+@media screen and (max-width: 620px){
+    li {
+        float: center;
+    }
+      
+}

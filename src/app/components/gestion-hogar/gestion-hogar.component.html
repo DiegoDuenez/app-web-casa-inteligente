@@ -1,0 +1,318 @@
+<app-nav-bar-top-sh></app-nav-bar-top-sh>
+<app-nav-bar></app-nav-bar>
+
+
+<div class="container">
+
+    <ul class="list-group m-top-50">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            Roles
+            <span class="badge"><button class="btn btn-registrar" (click)="getRoles()">Gestionar</button></span>
+          </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          Habitaciones
+          <span class="badge"><button class="btn btn-registrar" (click)="getHabitaciones()">Gestionar</button></span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+         Sensores
+          <span class="badge"><button class="btn btn-registrar" (click)="getSensores()">Gestionar</button></span>
+        </li>
+      </ul>
+
+</div>
+
+
+
+<div class="container" *ngIf="rolTable == true">
+    <table class="table m-top-30">
+        <thead class="bg-blue-2">
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let rol of roles">
+            <td>{{rol.nombre}}</td>
+            <td><button class="btn btn-outline-warning" data-toggle="modal" data-target="#editarRolModal" (click)="onSelectRol(rol)">Editar</button> &nbsp;
+               <button class="btn btn-outline-success" data-toggle="modal" data-target="#agregarAreaRol" (click)="getRolesAreas(rol)">Agregar area</button> &nbsp; 
+               <button class="btn btn-outline-danger" data-toggle="modal" data-target="#quitarAreaRol" (click)="getRolesAreas(rol)">Quitar area</button></td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+
+<div class="container" *ngIf="habitacionTable == true">
+    <table class="table m-top-30">
+        <thead class="bg-blue-2">
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Creación</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let h of habitaciones">
+            <td>{{h.nombre}}</td>
+            <td>{{h.created_at}}</td>
+            <td><button class="btn btn-outline-warning" data-toggle="modal" data-target="#editarHabModal" (click)="onSelectHabitacion(h)">Editar</button> &nbsp; 
+              <button class="btn btn-outline-danger" (click)="onDeleteArea(h)">Borrar</button></td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+
+<div class="container" *ngIf="sensorTable == true">
+    <div class="form-row align-items-center m-top-30">
+        <div class="col-auto my-1">
+            <select class="custom-select" (change)="onSelectSensor($event)" >
+            <option>Seleccione sensores...</option>
+            <option [value]="1">
+                Tipos
+            </option>
+            <option [value]="2">
+                Registrados
+            </option>
+            </select>
+        </div>
+    </div>
+    <table class="table m-top-30" *ngIf="sensorTipos == true">
+        <thead class="bg-blue-2">
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let s of sensores_tipos">
+            <td>{{s.nombre}}</td>
+            <td><button class="btn btn-outline-warning" data-toggle="modal" data-target="#editarSensorTipoModal" (click)="onSelectSensorTipo(s)">Editar</button></td>
+          </tr>
+        </tbody>
+      </table>
+
+
+      <table class="table m-top-30" *ngIf="sensorReg == true">
+        <thead class="bg-blue-2">
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let s of sensores_registrados">
+            <td>{{s.nombre}}</td>
+            <td><button class="btn btn-outline-warning" data-toggle="modal" data-target="#editarSensorRegModal" (click)="onSelectSensorReg(s)" >Editar</button> &nbsp;
+              <button class="btn btn-outline-danger" (click)="onDeleteSensorReg(s)">Borrar</button></td>
+          </tr>
+        </tbody>
+      </table>
+
+</div>
+
+
+<!-- Modal Editar roles-->
+<div class="modal fade" id="editarRolModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Roles</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="rolForm" (ngSubmit)="updateRol()">
+            <div class="form-group">
+                <label for="inputNombreRol">Nombre</label>
+                <input
+                  autocomplete="off"
+                  type="text"
+                  class="form-control"
+                  id="inputNombreRol"
+                  [(ngModel)]="nombreRol"
+                  formControlName="nombre"
+                [class.is-invalid]="nombreRolValidate"
+                  
+                />
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-lg btn-block btn-outline-warning">
+                  Guardar cambios
+                </button>
+              </div>
+        </form>
+    
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Modal Editar habitaciones -->
+<div class="modal fade" id="editarHabModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Habitaciones</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="habitacionForm" (ngSubmit)="updateHabitacion()">
+                <div class="form-group">
+                    <label for="inputNombre">Nombre</label>
+                    <input
+                      autocomplete="off"
+                      type="text"
+                      class="form-control"
+                      id="inputNombre"
+                      [(ngModel)]="nombreArea"
+                      formControlName="nombre"
+                    [class.is-invalid]="nombreValidate"
+                      
+                    />
+                  </div>
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-lg btn-block btn-outline-warning">
+                      Guardar cambios
+                    </button>
+                  </div>
+            </form>
+    
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal Editar Sensores tipos -->
+<div class="modal fade" id="editarSensorTipoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Tipos de sensores</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form [formGroup]="sensorTipoForm" (ngSubmit)="updateSensorTipo()">
+              <div class="form-group">
+                  <label for="inputNombreSt">Nombre</label>
+                  <input
+                    autocomplete="off"
+                    type="text"
+                    class="form-control"
+                    id="inputNombreSt"
+                    [(ngModel)]="nombreSensorTipo"
+                    formControlName="nombre"
+                  [class.is-invalid]="nombreSensorTipoValidate"
+                    
+                  />
+                </div>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-lg btn-block btn-outline-warning">
+                    Guardar cambios
+                  </button>
+                </div>
+          </form>
+  
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Editar Sensores registrados -->
+<div class="modal fade" id="editarSensorRegModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Sensores registrados</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form [formGroup]="sensorRegForm" (ngSubmit)="updateSensorReg()">
+              <div class="form-group">
+                  <label for="inputNombreSr">Nombre</label>
+                  <input
+                    autocomplete="off"
+                    type="text"
+                    class="form-control"
+                    id="inputNombreSr"
+                    [(ngModel)]="nombreSensorReg"
+                    formControlName="nombre"
+                  [class.is-invalid]="nombreSensorRegValidate"
+                    
+                  />
+                </div>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-lg btn-block btn-outline-warning">
+                    Guardar cambios
+                  </button>
+                </div>
+          </form>
+  
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Agregar area Roles-->
+<div class="modal fade" id="agregarAreaRol" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Agregar area</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form [formGroup]="rolAgregarAreaForm" (ngSubmit)="agregarRolArea()" >
+            <div class="form-group">
+              <select class="custom-select" (change)="onSelectArea($event)">
+                <option>Seleccione habitación...</option>
+                <option *ngFor="let h of habitaciones" [value]="h.id">
+                  {{h.nombre}}
+                </option>
+              </select>
+            </div>
+            <ul class="list-group">
+              <li class="list-group-item list-group-item-success" *ngFor="let ra of rolesAreas">{{ra.areaNombre}}</li>
+            </ul>
+                <div class="form-group p-top-20">
+                  <button type="submit" class="btn btn-lg btn-block btn-outline-success">
+                    Agregar
+                  </button>
+                </div>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Quitar area Roles-->
+<div class="modal fade" id="quitarAreaRol" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Quitar area</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <ul class="list-group">
+        <li class="list-group-item list-group-item-danger" *ngFor="let ra of rolesAreas">{{ra.areaNombre}} <button type="button" class="close text-danger" (click)="onDeleteAreaRol(ra)">
+          <span aria-hidden="true">&times;</span>
+        </button></li>
+      </ul>
+      </div>
+    </div>
+  </div>
+</div>

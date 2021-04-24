@@ -1,0 +1,22 @@
+<app-nav-bar-top-sh></app-nav-bar-top-sh>
+<app-nav-bar></app-nav-bar>
+
+<div class="container">
+
+    <div class="container bg-light ctn shadow rounded">
+        <img src="../../../assets/icon-blue-group.png" width="80" height="70">
+        <h4 class="titulo">Ver usuarios</h4>
+        <p class="m-top-20">Ve los usuarios que se han creado.</p>
+        <a href="#" class="btn btn-registrar" routerLink="/usuarios/lista">Ver</a>
+    </div>
+
+    <div class="container bg-light ctn shadow rounded" *ngIf="idRol == 1">
+        <img src="../../../assets/icon-blue-group.png" width="80" height="70">
+        <h4 class="titulo">Crear usuarios</h4>
+        <p class="m-top-20">Crea usuarios para especificar su rol dentro del hogar.</p>
+        <a href="#" class="btn btn-registrar" routerLink="/usuarios/crear">Crear</a>
+    </div>
+
+
+</div>
+

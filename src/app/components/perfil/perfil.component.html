@@ -1,0 +1,42 @@
+<app-nav-bar-top-sh></app-nav-bar-top-sh>
+<app-nav-bar></app-nav-bar>
+
+<div class="container">
+
+   
+   <!-- <h3>Juan Perez</h3>
+    
+
+    <div class="container bg-light ctn shadow rounded">
+        <img src="../../../assets/icon-blue-group.png" width="80" height="70">
+        <h4 class="titulo">Ver usuarios</h4>
+        <p class="m-top-20">Ve los usuarios que se han creado.</p>
+        <a href="#" class="btn btn-registrar">Ver</a>
+    </div>
+
+    <div class="container bg-light ctn shadow rounded">
+        <img src="../../../assets/icon-blue-group.png" width="80" height="70">
+        <h4 class="titulo">Crear usuario</h4>
+        <p class="m-top-20">Crea usuarios para especificar sus permisos dentro del hogar.</p>
+        <a href="#" class="btn btn-registrar">Crear</a>
+    </div>-->
+    
+
+
+</div>
+
+<div class="container bg-light ctn shadow rounded">
+    <h4 align="center">{{nombre}}</h4>
+    <div class="m-auto p-top-20">
+        <a class="display-inline-b" routerLink="/gestion"><img src="../../../assets/icon-blue-home.png" width="30" height="35">&nbsp; Gestión del Hogar</a>
+    </div>
+    <div class="m-auto p-top-20">
+        <a class="display-inline-b" ><img src="../../../assets/icon-blue-book.png" width="30" height="30">&nbsp; Centro de Ayuda</a>
+    </div>
+    <!--<div class="m-auto p-top-20">
+        <a class="display-inline-b"><img src="../../../assets/icon-blue-sett.png" width="30" height="30">&nbsp; Ajustes</a>
+    </div>-->
+    <div class="m-auto p-top-20">
+        <a class="display-inline-b" (click)="authService.logout()"><img src="../../../assets/icon-blue-logout.png" width="30" height="30">&nbsp; Salir</a>
+    </div>
+</div>

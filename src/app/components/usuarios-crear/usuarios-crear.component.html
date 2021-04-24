@@ -1,0 +1,44 @@
+<app-nav-bar-top-sh></app-nav-bar-top-sh>
+<app-nav-bar></app-nav-bar>
+
+<div class="alert alert-info" role="alert" *ngIf="alert == true">
+    El usuario se ha creado correctamente <a routerLink="/usuarios/lista" class="alert-link">ver usuarios</a>
+</div>
+
+<div class="container">
+    <form class="login" [formGroup]="userForm" (ngSubmit)="createUser()" *ngIf="idRol == 1">
+        <div class="form-group">
+            <label for="inputAddress2">Nombre</label>
+            <input
+                autocomplete="off"
+                type="text"
+                class="form-control"
+                id="inputAddress2"
+                autofocus
+                formControlName="nombre"
+                [class.is-invalid]="nombreValidate"
+            />
+        </div>
+        <div class="form-group">
+            <label for="inputAddress2">Rol</label>
+            <select class="custom-select" (change)="onSelectRol($event)">
+              <option>Seleccione rol...</option>
+              <option *ngFor="let rol of roles" [value]="rol.id">
+                {{rol.nombre}}
+              </option>
+            </select>
+        </div>
+        <div class="form-group">
+        <button type="submit" class="btn btn-lg btn-block btn-registrar">
+            Registrar
+        </button>
+        <p class="color-blue" align="center">(Al crear el usuario se generara un codigo QR)</p>
+        </div>
+
+    </form>
+
+    <div class="container bg-light ctn shadow rounded" *ngIf="idRol != 1">
+        <h4 class="text-secondary">No tienes acceso a esta acción</h4>
+    </div>
+
+</div>

@@ -1,0 +1,55 @@
+.btn-mgt{
+    margin-top: 10px;
+}
+
+.ctn{
+    
+    margin: auto;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+.login{
+    width: 300px;
+    margin-left: 50px;
+    margin-top: 50px;
+    padding: 20px;
+}
+
+.btn-registrar{
+    background: none;
+    color: #05c7c7d2;
+    border-color:#05c7c7d2;
+}
+
+.btn-registrar:hover{
+    color: white;
+    /*background: linear-gradient(to right, #05c7c7d2, #010544d2);*/
+    border-color: #05c7c7d2;
+    background: #05c7c7d2;
+}
+
+.txt-card{
+    display: inline-block;
+}
+/* CARTAS */
+
+
+.ctn:hover{
+    transform: scale(1.05);
+    box-shadow: 0 0 40px -10px rgba(0 , 0 , 0 , 0.25);
+}
+
+.m-top{
+    margin-top: 40px;
+}
+
+.titulo{
+    display:inline-block;
+    padding-left: 10px;
+    vertical-align: bottom;
+}
+
+.m-top-20{
+    margin-top: 20px;
+}

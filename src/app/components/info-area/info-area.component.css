@@ -1,0 +1,86 @@
+.p-top-20{
+    padding-top: 20px;
+}
+
+.ctn{
+    width: 1000px;
+    margin: auto;
+    padding: 50px;
+    margin-top: 50px;
+}
+
+.login{
+    width: 300px;
+    margin-left: 50px;
+    margin-top: 50px;
+    padding: 20px;
+}
+
+.btn-registrar{
+    background: none;
+    color: #05c7c7d2;
+    border-color:#05c7c7d2;
+}
+
+.btn-registrar:hover{
+    color: white;
+    /*background: linear-gradient(to right, #05c7c7d2, #010544d2);*/
+    border-color: #05c7c7d2;
+    background: #05c7c7d2;
+}
+
+.txt-card{
+    display: inline-block;
+}
+/* CARTAS */
+
+
+.ctn:hover{
+    transform: scale(1.05);
+    box-shadow: 0 0 40px -10px rgba(0 , 0 , 0 , 0.25);
+}
+
+.m-top{
+    margin-top: 40px;
+}
+
+.titulo{
+    display:inline-block;
+    padding-left: 10px;
+    vertical-align: center;
+}
+
+.m-top-20{
+    margin-top: 20px;
+}
+
+#avatar{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: auto;
+    display: block;
+
+  }
+
+.display-inline-b{
+    display: inline-block;
+}
+
+a{
+    color: #05c7c7d2;
+    cursor: pointer;
+}
+
+.bg-blue-1{
+    background-color: #05c7c7d2;
+}
+
+.bg-blue-2{
+    color: white;
+    background-color: #010544d2;
+}
+
+.m-bot-20{
+    margin-bottom: 20px;
+}

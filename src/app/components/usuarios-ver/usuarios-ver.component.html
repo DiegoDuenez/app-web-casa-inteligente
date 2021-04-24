@@ -1,0 +1,27 @@
+<app-nav-bar-top-sh></app-nav-bar-top-sh>
+<app-nav-bar></app-nav-bar>
+
+
+
+<div class="container ">
+    <table class="table m-top-30">
+        <thead class="bg-blue-2">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Email</th>
+            <th scope="col">Rol</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let usuario of usuarios">
+            <th scope="row">{{usuario.id}}</th>
+            <td>{{usuario.nombre}}</td>
+            <td>{{usuario.email}}</td>
+            <td>{{usuario.rol_nombre}}</td>
+            <td><button class="btn btn-outline-danger" *ngIf="idRol == 1 && idUser != usuario.id" (click)="onDeleteUser(usuario)">Borrar</button></td>
+          </tr>
+        </tbody>
+      </table>
+</div>

@@ -1,0 +1,17 @@
+<app-nav-bar-top-sh></app-nav-bar-top-sh>
+<app-nav-bar></app-nav-bar>
+
+<div class="container">
+
+    <div class="container bg-light ctn shadow rounded" *ngFor="let area of areas">
+        <img src="../../../assets/icon-blue-home.png" width="60" height="70">
+        <h4 class="titulo">{{ area.nombre }}</h4>
+        <p class="m-top-20">Creación: {{ area.created_at}}</p>
+        <button class="btn btn-registrar" (click)="onSelectAreaInfo(area)">Información</button>
+    </div>
+
+    <div class="container bg-light ctn shadow rounded" *ngIf="areas?.length == 0">
+        <h4 class="text-secondary">No tienes acceso a ningún area</h4>
+    </div>
+
+</div>

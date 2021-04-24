@@ -1,0 +1,91 @@
+<app-nav-bar-top-sh></app-nav-bar-top-sh>
+<app-nav-bar></app-nav-bar>
+
+<div class="container bg-light ctn shadow rounded" *ngIf="alert == false">
+    <h4 align="center">{{areaNombre}}</h4>
+    <button class="btn btn-outline-success m-bot-20" *ngIf="idRol == 1" data-toggle="modal" data-target="#exampleModal">Agregar sensor</button>
+    <table class="table m-top-30">
+        <thead class="bg-blue-2">
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let sensor of sensores">
+            <td scope="row">{{sensor.sensor_nombre}}</td>
+            <td><button class="btn btn-registrar" (click)="onSelectHistorial(sensor)" data-toggle="modal" data-target="#historialModal">Historial</button> &nbsp;
+                <button class="btn btn-outline-danger" *ngIf="idRol == 1" (click)="onDeleteSensorArea(sensor)">Borrar</button></td>
+          </tr>
+          
+        </tbody>
+      </table>
+
+        
+</div>
+
+<div class="container bg-light ctn shadow rounded" *ngIf="alert == true">
+    <h4 class="text-secondary">No tienes acceso a esta area</h4>
+</div>
+
+<div class="container bg-light ctn shadow rounded" *ngIf="sensores?.length == 0 && alert == false">
+    <h4 class="text-secondary">No hay sensores en esta area</h4>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Sensores registrados</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="sensorAreaForm"  (ngSubmit)="createSensorArea()" >
+            <select class="custom-select" (change)=" onSelectSensorRegistrado($event)" formControlName="sensor_id">
+              <option>Seleccione sensor...</option>
+              <option *ngFor="let sensor of sensoresRegistrados" [value]="sensor.id" >
+                {{ sensor.nombre }}
+              </option>
+            </select>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-outline-success" >Agregar</button>
+            </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+<!-- Modal -->
+<div class="modal fade" id="historialModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Historial</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ul class="list-group">
+          <li class="list-group-item bg-blue-2">{{sensorNombre}}</li>
+          <li class="list-group-item text-secondary" *ngFor="let h of historial"> {{h.created_at}}
+            <p *ngIf="h.distancia != null" class="text-dark">{{ h.distancia }}</p> 
+            <p *ngIf="h.temperatura != null" class="text-dark">{{ h.temperatura }}</p> 
+            <p *ngIf="h.pir != null" class="text-dark">{{ h.pir }}</p> 
+            <p *ngIf="h.humedad != null" class="text-dark">{{ h.humedad }}</p> 
+          </li>
+          <li class="list-group-item" *ngIf="historial?.length == 0">No hay historial de este sensor</li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <!--<button type="submit" class="btn btn-outline-success" (click)="refreshDataHistorial()">Refrescar</button>-->
+    </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+.btn-registrar{
+    background: none;
+    color: #05c7c7d2;
+    border-color:#05c7c7d2;
+}
+
+.btn-registrar:hover{
+    color: white;
+    /*background: linear-gradient(to right, #05c7c7d2, #010544d2);*/
+    border-color: #05c7c7d2;
+    background: #05c7c7d2;
+}
+
+.m-top-50{
+    margin-top: 50px;
+}
+
+.p-top-20{
+    padding-top: 20px;
+}
+
+.ctn{
+    width: 1000px;
+    margin: auto;
+    padding: 50px;
+    margin-top: 50px;
+}
+
+.login{
+    width: 300px;
+    margin-left: 50px;
+    margin-top: 50px;
+    padding: 20px;
+}
+
+.bg-blue-1{
+    background-color: #05c7c7d2 !important;
+}
+
+.bg-blue-2{
+    background-color: #010544d2 !important;
+    color: white;
+}
+
+
+.m-top-30{
+    margin-top: 50px;
+}

@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment.prod';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Sensor } from '../../models/sensor'
 import { Area } from 'src/app/models/area';
+import { HistorialSensor } from 'src/app/models/historial-sensor';
 import { SensorArea } from 'src/app/models/sensor-area';
 
 @Injectable({
@@ -74,6 +75,9 @@ export class SensorService {
     return this.httpClient.delete(`${this.apiURL}/eliminar/sensor/registrado/` + id)
   }
 
+  getHistorialMongo(data: any){
+    return this.httpClient.post(`${this.apiURL}/crear/historial/sensores/`, data);
+  }
   
 
  

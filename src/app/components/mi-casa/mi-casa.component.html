@@ -8,6 +8,7 @@
         <h4 class="titulo">{{ area.nombre }}</h4>
         <p class="m-top-20">Creación: {{ area.created_at}}</p>
         <button class="btn btn-registrar" (click)="onSelectAreaInfo(area)">Información</button>
+        
     </div>
 
     <div class="container bg-light ctn shadow rounded" *ngIf="areas?.length == 0">

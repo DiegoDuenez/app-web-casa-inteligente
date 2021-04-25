@@ -3,6 +3,13 @@
 
 <div class="container bg-light ctn shadow rounded" *ngIf="alert == false">
     <h4 align="center">{{areaNombre}}</h4>
+    <ngx-qrcode 
+            [elementType]="elementType" 
+            [value] = "value"
+            cssClass = "aclass"
+            errorCorrectionLevel = "correctionLevel"
+            class="text-center">
+        </ngx-qrcode>
     <button class="btn btn-outline-success m-bot-20" *ngIf="idRol == 1" data-toggle="modal" data-target="#exampleModal">Agregar sensor</button>
     <table class="table m-top-30">
         <thead class="bg-blue-2">
@@ -14,7 +21,7 @@
         <tbody>
           <tr *ngFor="let sensor of sensores">
             <td scope="row">{{sensor.sensor_nombre}}</td>
-            <td><button class="btn btn-registrar" (click)="onSelectHistorial(sensor)" data-toggle="modal" data-target="#historialModal">Historial</button> &nbsp;
+            <td><button class="btn btn-registrar" (click)="onSelectHistorialMongo(sensor)" data-toggle="modal" data-target="#historialModal">Historial</button> &nbsp;
                 <button class="btn btn-outline-danger" *ngIf="idRol == 1" (click)="onDeleteSensorArea(sensor)">Borrar</button></td>
           </tr>
           
@@ -74,11 +81,11 @@
       <div class="modal-body">
         <ul class="list-group">
           <li class="list-group-item bg-blue-2">{{sensorNombre}}</li>
-          <li class="list-group-item text-secondary" *ngFor="let h of historial"> {{h.created_at}}
-            <p *ngIf="h.distancia != null" class="text-dark">{{ h.distancia }}</p> 
-            <p *ngIf="h.temperatura != null" class="text-dark">{{ h.temperatura }}</p> 
+          <li class="list-group-item text-secondary" *ngFor="let h of historial"> {{h.createdAt}}
+            <p *ngIf="h.distancia != 0" class="text-dark">{{ h.distancia }}</p> 
+            <p *ngIf="h.temperatura != 0" class="text-dark">{{ h.temperatura }}</p> 
             <p *ngIf="h.pir != null" class="text-dark">{{ h.pir }}</p> 
-            <p *ngIf="h.humedad != null" class="text-dark">{{ h.humedad }}</p> 
+            <p *ngIf="h.humedad != 0" class="text-dark">{{ h.humedad }}</p> 
           </li>
           <li class="list-group-item" *ngIf="historial?.length == 0">No hay historial de este sensor</li>
         </ul>

@@ -2,10 +2,22 @@
 <app-nav-bar></app-nav-bar>
 
 <div class="alert alert-info" role="alert" *ngIf="alert == true">
-    El usuario se ha creado correctamente <a routerLink="/usuarios/lista" class="alert-link">ver usuarios</a>
+    El usuario se ha creado correctamente <a routerLink="/usuarios/lista" class="alert-link">ver usuarios</a>. Recuerda guardar el QR.
 </div>
 
 <div class="container">
+    <div class="text-center" *ngIf="alertModalQR == true">
+        <ngx-qrcode 
+            [elementType]="elementType" 
+            [value] = "value"
+            cssClass = "aclass"
+            errorCorrectionLevel = "correctionLevel"
+            class="text-center">
+        </ngx-qrcode>
+        <p class="text-dark" align="center">(codigo QR generado)</p>
+    </div>
+
+
     <form class="login" [formGroup]="userForm" (ngSubmit)="createUser()" *ngIf="idRol == 1">
         <div class="form-group">
             <label for="inputAddress2">Nombre</label>
@@ -21,7 +33,7 @@
         </div>
         <div class="form-group">
             <label for="inputAddress2">Rol</label>
-            <select class="custom-select" (change)="onSelectRol($event)">
+            <select class="custom-select" (change)="onSelectRol($event)" formControlName="rol_id" [class.is-invalid]="rolValidate">
               <option>Seleccione rol...</option>
               <option *ngFor="let rol of roles" [value]="rol.id">
                 {{rol.nombre}}
@@ -40,5 +52,8 @@
     <div class="container bg-light ctn shadow rounded" *ngIf="idRol != 1">
         <h4 class="text-secondary">No tienes acceso a esta acción</h4>
     </div>
+
+    
+    
 
 </div>

@@ -8,6 +8,7 @@ import { AuthService } from '../../services/auth/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SensorService } from 'src/app/services/sensor/sensor.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiediaries/ngx-qrcode';
 
 @Component({
   selector: 'app-info-area',
@@ -32,8 +33,14 @@ export class InfoAreaComponent implements OnInit {
   historial!: HistorialSensor[];
   sensorNombre!: String;
   idSensorHistorial!: Number;
+  nombreSensorHistorial!: String;
 
   alert: Boolean = true;
+  dataMongo = {}
+  title = 'app';
+  elementType = NgxQrcodeElementTypes.IMG;
+  value!: any;
+  correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
 
   constructor( public areaService: AreaService, 
     public authService: AuthService,
@@ -42,6 +49,7 @@ export class InfoAreaComponent implements OnInit {
 
   ngOnInit(): void {
     this.idAreaParam = this.route.snapshot.params['id'];
+    this.value = this.idAreaParam
     this.x = this.idAreaParam
     this.areaService.get(this.idAreaParam).subscribe((data: any)=>{
       this.areaNombre = data.area.nombre
@@ -161,6 +169,7 @@ export class InfoAreaComponent implements OnInit {
     
   }
 
+  /* -- - - - - MYSQL
   onSelectHistorial(sensor: SensorArea){
     this.idSensorHistorial = sensor.sensor_id;
     this.sensorService.getHistorialSensor(sensor.sensor_id).subscribe((data:any)=>{
@@ -168,7 +177,20 @@ export class InfoAreaComponent implements OnInit {
       this.sensorNombre = sensor.sensor_nombre
       console.log(this.historial)
     })
+    
 
+  }*/
+
+  onSelectHistorialMongo(sensor: SensorArea){
+    this.dataMongo = {
+      nombreSensor: sensor.sensor_nombre
+    }
+    //this.nombreSensorHistorial = sensor.sensor_nombre;
+    this.sensorService.getHistorialMongo(this.dataMongo).subscribe((data:any)=>{
+      this.historial = data.data
+      this.sensorNombre = sensor.sensor_nombre
+      console.log("mongo", this.historial)
+    })
   }
 
   refreshDataHistorial(){

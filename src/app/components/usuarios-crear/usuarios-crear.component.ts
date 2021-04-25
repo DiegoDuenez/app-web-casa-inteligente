@@ -4,6 +4,7 @@ import { Rol } from '../../models/rol';
 import { User } from '../../models/user';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels} from '@techiediaries/ngx-qrcode';
 
 
 @Component({
@@ -14,11 +15,20 @@ import { Router } from '@angular/router';
 export class UsuariosCrearComponent implements OnInit {
 
   alert!: Boolean;
+  alertModalQR!: Boolean;
   user!: User;
   roles!: Rol[];
   userForm!: FormGroup;
   idRol!: Number;
   idRolSelect!: Number;
+
+  title = 'app';
+  elementType = NgxQrcodeElementTypes.IMG;
+  value!: any;
+  correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
+  /*idNewUser!: Number;
+  nombreNewUser!: String;
+  value = {id: this.idNewUser, nombre: this.nombreNewUser};*/
 
   constructor(public authService: AuthService,private fb: FormBuilder, private router: Router) { this.createForm() }
 
@@ -49,6 +59,20 @@ export class UsuariosCrearComponent implements OnInit {
           //this.router.navigate(['/perfil']);
           this.alert = true;
           console.log(data)
+          /*if (data[0].message){
+            this.alertModalQR = false;
+          }
+          else{
+            console.log(data)
+            this.alertModalQR = true;
+            this.value = this.user.nombre;
+          }*/
+
+          this.alertModalQR = true;
+          this.value = this.user.nombre;
+          /*this.value.id = this.user.id;
+          this.value.nombre = this.user.nombre;*/
+
           
           
         },
@@ -67,9 +91,17 @@ export class UsuariosCrearComponent implements OnInit {
     );
   }
 
+  get rolValidate(){
+    return(
+      this.userForm.get('rol_id')?.invalid &&
+      this.userForm.get('rol_id')?.touched
+    );
+  }
+
   createForm(): void {
     this.userForm = this.fb.group({
       nombre: ['', [Validators.required]],
+      rol_id: ['', [Validators.required]]
     });
   }
 
@@ -96,6 +128,8 @@ export class UsuariosCrearComponent implements OnInit {
      console.log(this.sensor_tipo.id)
      console.log(data)
      console.log(data)*/
+
+     
 
     }, error =>{
       console.log(error)

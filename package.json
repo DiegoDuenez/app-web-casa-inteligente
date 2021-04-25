@@ -22,6 +22,7 @@
     "@angular/router": "~11.0.6",
     "@babel/polyfill": "^7.12.1",
     "@popperjs/core": "^2.9.1",
+    "@techiediaries/ngx-qrcode": "^9.1.0",
     "bootstrap": "^4.6.0",
     "ionicons": "^5.5.1",
     "jquery": "^3.6.0",

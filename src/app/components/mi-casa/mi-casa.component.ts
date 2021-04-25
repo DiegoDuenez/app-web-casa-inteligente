@@ -3,6 +3,7 @@ import { Area } from 'src/app/models/area';
 import {  AreaService } from '../../services/area/area.service';
 import {AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
+import { NgxQrcodeElementTypes } from '@techiediaries/ngx-qrcode';
 
 @Component({
   selector: 'app-mi-casa',
@@ -15,6 +16,10 @@ export class MiCasaComponent implements OnInit {
   areas!: Area[];
 
   idUser!: Number;
+
+  title = 'app';
+  elementType = NgxQrcodeElementTypes.IMG;
+  value!: any;
 
   constructor(public areaService: AreaService, public authService: AuthService,private router: Router) { }
 

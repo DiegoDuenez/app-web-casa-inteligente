@@ -16,6 +16,7 @@ import { RegistroSensorComponent } from './components/registro-sensor/registro-s
 import { UsuariosVerComponent } from './components/usuarios-ver/usuarios-ver.component';
 import { UsuariosCrearComponent } from './components/usuarios-crear/usuarios-crear.component';
 import { AuthGuard } from './guards/auth.guard';
+import { NgxQRCodeModule} from '@techiediaries/ngx-qrcode';
 
 import { AuthInterceptorService } from './services/auth/auth-interceptor.service';
 import { InfoAreaComponent } from './components/info-area/info-area.component';
@@ -39,11 +40,13 @@ import { GestionHogarComponent } from './components/gestion-hogar/gestion-hogar.
     GestionHogarComponent
   ],
   imports: [
+    NgxQRCodeModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

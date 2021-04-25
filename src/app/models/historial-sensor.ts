@@ -5,7 +5,7 @@ export interface HistorialSensor {
     pir: Number;
     humedad: Number;
     temperatura: Number;
-    created_at: Date;
+    createdAt: Date;
     updated_at: Date;
     nombre: String;
 

@@ -24,10 +24,16 @@ export class RegistroSensorComponent implements OnInit {
   sensor!: Sensor;
   idSensorTipo!: Number;
   idRol!: Number;
+
+  unPin!: Boolean;
+  dosPin!: Boolean;
+
+  pinRepeat!: Boolean;
   constructor(public areaService: AreaService, public authService: AuthService, public sensorService: SensorService,private fb: FormBuilder, private router: Router) { this.createForm() }
 
   ngOnInit(): void {
     this.alert = false;
+    this.pinRepeat = false;
     this.getAreas()
     this.getSensoresTipos()
     this.getPerfil()
@@ -59,6 +65,15 @@ export class RegistroSensorComponent implements OnInit {
           //this.router.navigate(['/perfil']);
           this.alert = true;
           console.log(data)
+
+          if(data[0].message ==  "unique validation failed on pin_1"){
+            this.pinRepeat = true;
+            this.alert = false;
+          }
+          else if(data[0].message ==  "unique validation failed on pin_2"){
+            this.alert = false;
+            this.pinRepeat = true;
+          }
           
           
         },
@@ -77,11 +92,48 @@ export class RegistroSensorComponent implements OnInit {
     );
   }
 
+  get pin1Validate() {
+    return (
+      this.sensorForm.get('pin_1')?.invalid &&
+      this.sensorForm.get('pin_1')?.touched
+    );
+  }
+
+  get pin2Validate() {
+    return (
+      this.sensorForm.get('pin_2')?.invalid &&
+      this.sensorForm.get('pin_2')?.touched
+    );
+  }
+
+
+  
 
   createForm(): void {
-    this.sensorForm = this.fb.group({
-      nombre: ['', [Validators.required]],
-    });
+    if(this.unPin == true){
+      this.sensorForm = this.fb.group({
+        nombre: ['', [Validators.required]],
+        pin_1: ['', [Validators.required]],
+        pin_2: ['', [Validators.nullValidator]]
+        
+      });
+    }
+    else if(this.dosPin == true){
+      this.sensorForm = this.fb.group({
+        nombre: ['', [Validators.required]],
+        pin_1: ['', [Validators.required]],
+        pin_2: ['', [Validators.required]]
+        
+      });
+    }
+    else{
+      this.sensorForm = this.fb.group({
+        nombre: ['', [Validators.required]],
+        pin_1: ['', [Validators.nullValidator]],
+        pin_2: ['', [Validators.nullValidator]]
+      });
+    }
+    
   }
 
   setSensor(): void {
@@ -89,7 +141,9 @@ export class RegistroSensorComponent implements OnInit {
       id: this.sensorForm.get('id')?.value,
       nombre: this.sensorForm.get('nombre')?.value,
       tipo_id: this.idSensorTipo,
-      created_at: this.sensorForm.get('created_at')?.value
+      created_at: this.sensorForm.get('created_at')?.value,
+      pin_1: this.sensorForm.get('pin_1')?.value,
+      pin_2: this.sensorForm.get('pin_2')?.value
     };
   }
 
@@ -102,6 +156,15 @@ export class RegistroSensorComponent implements OnInit {
       
      // this.sensor_tipo = data
      this.sensor_tipo = data.sensor_tipo[0]
+     if(this.sensor_tipo.nombre == "pir" || this.sensor_tipo.nombre == "led"){
+       this.unPin = true;
+       this.dosPin = false;
+     }
+     else{
+      this.unPin = true;
+      this.dosPin = true;
+     }
+
      console.log(this.sensor_tipo.id)
 
     }, error =>{

@@ -14,13 +14,13 @@ export class NavBarComponent implements OnInit {
   
 
   ngOnInit(): void {
-    this.getPerfil()
+   this.getPerfil()
   }
 
   getPerfil(){
     this.authService.getPerfil().subscribe((data:any)=>{
       this.idRol = data.rol_id
-      console.log("rol",this.idRol)
+      
     })
   }
 

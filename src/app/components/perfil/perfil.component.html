@@ -27,7 +27,7 @@
 
 <div class="container bg-light ctn shadow rounded">
     <h4 align="center">{{nombre}}</h4>
-    <div class="m-auto p-top-20">
+    <div class="m-auto p-top-20" *ngIf="idRol === 1">
         <a class="display-inline-b" routerLink="/gestion"><img src="../../../assets/icon-blue-home.png" width="30" height="35">&nbsp; Gestión del Hogar</a>
     </div>
     <div class="m-auto p-top-20">

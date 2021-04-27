@@ -2,7 +2,11 @@
 <app-nav-bar></app-nav-bar>
 
 <div class="alert alert-info" role="alert" *ngIf="alert == true">
-  El sensor se ha creado correctamente 
+  El sensor se ha creado correctamente.
+</div>
+
+<div class="alert alert-danger" role="alert" *ngIf="pinRepeat == true">
+  No puedes ingresar un pin repetido.
 </div>
 
 <div class="container">
@@ -40,6 +44,30 @@
             [class.is-invalid]="nombreValidate"
         />
         </div>
+        <div class="form-group" *ngIf="unPin == true">
+          <label for="inputAddress2">Pin 1</label>
+          <input
+              autocomplete="off"
+              type="text"
+              class="form-control"
+              id="inputAddress2"
+              autofocus
+              formControlName="pin_1"
+              [class.is-invalid]="pin1Validate"
+          />
+          </div>
+          <div class="form-group" *ngIf="dosPin == true">
+            <label for="inputAddress2">Pin 2</label>
+            <input
+                autocomplete="off"
+                type="text"
+                class="form-control"
+                id="inputAddress2"
+                autofocus
+                formControlName="pin_2"
+                [class.is-invalid]="pin2Validate"
+            />
+            </div>
         <div class="form-group">
         <button type="submit" class="btn btn-lg btn-block btn-registrar">
             Registrar

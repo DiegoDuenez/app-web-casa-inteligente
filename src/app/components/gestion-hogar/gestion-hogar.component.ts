@@ -52,6 +52,7 @@ export class GestionHogarComponent implements OnInit {
   rolAgregarAreaForm!: FormGroup;
 
   idAreaRol!:Number;
+  idUserRol!: Number;
 
   rolesAreas!: RolArea[];
 
@@ -67,7 +68,15 @@ export class GestionHogarComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    this.getPerfil()
     this.getHabitacionesRol()
+  }
+
+  getPerfil(){
+    this.authService.getPerfil().subscribe((data:any)=>{
+      this.idUserRol = data.rol_id
+      console.log(this.idUserRol)
+    })
   }
 
   updateHabitacion(): void {
@@ -249,7 +258,9 @@ export class GestionHogarComponent implements OnInit {
       id: this.sensorTipoForm.get('id')?.value,
       nombre: this.sensorTipoForm.get('nombre')?.value,
       created_at: this.sensorTipoForm.get('created_at')?.value,
-      tipo_id: this.sensorTipoForm.get('tipo_id')?.value
+      tipo_id: this.sensorTipoForm.get('tipo_id')?.value,
+      pin_1:  this.sensorTipoForm.get('pin_1')?.value,
+      pin_2: this.sensorTipoForm.get('pin_2')?.value,
 
     };
   }
@@ -308,7 +319,9 @@ export class GestionHogarComponent implements OnInit {
       id: this.sensorRegForm.get('id')?.value,
       nombre: this.sensorRegForm.get('nombre')?.value,
       created_at: this.sensorRegForm.get('created_at')?.value,
-      tipo_id: this.sensorRegForm.get('tipo_id')?.value
+      tipo_id: this.sensorRegForm.get('tipo_id')?.value,
+      pin_1:  this.sensorTipoForm.get('pin_1')?.value,
+      pin_2: this.sensorTipoForm.get('pin_2')?.value,
 
     };
   }

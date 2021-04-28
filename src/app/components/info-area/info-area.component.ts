@@ -9,6 +9,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { SensorService } from 'src/app/services/sensor/sensor.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiediaries/ngx-qrcode';
+import { interval, Observable } from "rxjs";
+const Ws = require('@adonisjs/websocket-client');
+
 
 @Component({
   selector: 'app-info-area',
@@ -16,6 +19,10 @@ import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiedi
   styleUrls: ['./info-area.component.css']
 })
 export class InfoAreaComponent implements OnInit {
+
+  chat: any;
+  messages: string[] = [];
+  text!: string;
 
   idRol!: Number;
   idAreaParam!: Number;
@@ -42,12 +49,20 @@ export class InfoAreaComponent implements OnInit {
   value!: any;
   correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
 
+  secondsCounter!: Observable<Number>
+
   constructor( public areaService: AreaService, 
     public authService: AuthService,
     public sensorService: SensorService, private route: ActivatedRoute,
      private fb: FormBuilder, private router: Router) { this.createForm() }
 
   ngOnInit(): void {
+
+    this.secondsCounter = interval(1000);
+
+   
+
+
     this.idAreaParam = this.route.snapshot.params['id'];
     this.value = this.idAreaParam
     this.x = this.idAreaParam
@@ -67,6 +82,8 @@ export class InfoAreaComponent implements OnInit {
 
     
   }
+
+  
 
   getHistorial(){
    //  this.sensorService.getHistorialSensor
@@ -186,11 +203,22 @@ export class InfoAreaComponent implements OnInit {
       nombreSensor: sensor.sensor_nombre
     }
     //this.nombreSensorHistorial = sensor.sensor_nombre;
-    this.sensorService.getHistorialMongo(this.dataMongo).subscribe((data:any)=>{
+
+    this.secondsCounter.subscribe(n =>
+      this.sensorService.getHistorialMongo(this.dataMongo).subscribe((data:any)=>{
+        this.historial = data.data
+        this.sensorNombre = sensor.sensor_nombre
+        //console.log("mongo ", this.historial)
+        
+      })
+    );
+
+    /*this.sensorService.getHistorialMongo(this.dataMongo).subscribe((data:any)=>{
       this.historial = data.data
       this.sensorNombre = sensor.sensor_nombre
-      console.log("mongo", this.historial)
-    })
+      //console.log("mongo ", this.historial)
+      
+    })*/
   }
 
   refreshDataHistorial(){

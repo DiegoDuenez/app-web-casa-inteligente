@@ -79,7 +79,7 @@
       </div>
       <div class="modal-body">
         <ul class="list-group">
-          <li class="list-group-item bg-blue-2">{{sensorNombre}}</li>
+          <li class="list-group-item bg-blue-2"></li>
           <li class="list-group-item text-secondary" *ngFor="let h of historial"> {{h.createdAt}}
             <p *ngIf="h.distancia != 0" class="text-dark">{{ h.distancia }}</p> 
             <p *ngIf="h.temperatura != 0" class="text-dark">{{ h.temperatura }}</p> 
@@ -95,3 +95,4 @@
     </div>
   </div>
 </div>
+

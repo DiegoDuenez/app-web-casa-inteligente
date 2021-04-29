@@ -40,7 +40,7 @@
             <td><button class="btn btn-outline-warning" data-toggle="modal" data-target="#editarRolModal" (click)="onSelectRol(rol)">Editar</button> &nbsp;
                <button class="btn btn-outline-success" data-toggle="modal" data-target="#agregarAreaRol" (click)="getRolesAreas(rol)">Agregar area</button> &nbsp; 
                <button class="btn btn-outline-danger" data-toggle="modal" data-target="#quitarAreaRol" (click)="getRolesAreas(rol)">Quitar area</button> &nbsp; 
-               <button class="btn btn-outline-danger" *ngIf="rol.nombre != 'admin'" (click)="onDeleteRol(rol)">Eliminar rol</button>
+               <button class="btn btn-outline-danger" *ngIf="rol.id != 1" (click)="onDeleteRol(rol)">Eliminar rol</button>
               </td>
           </tr>
         </tbody>

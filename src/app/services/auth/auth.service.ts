@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 import { ActivatedRoute, Router } from '@angular/router';
-import {User} from '../../models/user'
+import { User } from '../../models/user'
 import { Rol } from 'src/app/models/rol';
 
 @Injectable({

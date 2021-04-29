@@ -33,6 +33,9 @@
     <div class="m-auto p-top-20">
         <a class="display-inline-b" routerLink="/centroayuda"><img src="../../../assets/icon-blue-book.png" width="30" height="30">&nbsp; Centro de Ayuda</a>
     </div>
+    <div class="m-auto p-top-20">
+        <a class="display-inline-b" data-toggle="modal" data-target="#notiModal" (click)="getNotificaciones()"><img src="../../../assets/notificacion.png" width="30" height="30">&nbsp; Notificaciónes <span *ngIf="cantidad > 0" class="badge badge-primary badge-pill bg-danger">{{cantidad}}</span></a>
+    </div>
     <!--<div class="m-auto p-top-20">
         <a class="display-inline-b"><img src="../../../assets/icon-blue-sett.png" width="30" height="30">&nbsp; Ajustes</a>
     </div>-->
@@ -40,3 +43,29 @@
         <a class="display-inline-b" (click)="authService.logout()"><img src="../../../assets/icon-blue-logout.png" width="30" height="30">&nbsp; Salir</a>
     </div>
 </div>
+
+ 
+<!-- Modal -->
+<div class="modal fade" id="notiModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Notificaciones</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-info" *ngFor="let n of notificaciones">
+                    {{n.titulo}} <br> El usuario {{n.nombre_autor}} quiere {{n.contenido}} <br> <br>
+                     <a routerLink="/usuarios/crear" class="btn btn-success text-white btn-sm">Aceptar</a> &nbsp;
+                     <button type="button" class="btn btn-danger btn-sm">Rechazar</button>
+                </li>
+            </ul>
+        <div class="modal-footer">
+          <!--<button type="submit" class="btn btn-outline-success" (click)="refreshDataHistorial()">Refrescar</button>-->
+      </div>
+      </div>
+    </div>
+  </div>

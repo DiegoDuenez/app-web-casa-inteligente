@@ -26,6 +26,7 @@
 
 
 <div class="container" *ngIf="rolTable == true">
+  <button class="btn btn-outline-success margin-top-bot" data-toggle="modal" data-target="#exampleModal">Crear rol</button>
     <table class="table m-top-30">
         <thead class="bg-blue-2">
           <tr>
@@ -38,7 +39,9 @@
             <td>{{rol.nombre}}</td>
             <td><button class="btn btn-outline-warning" data-toggle="modal" data-target="#editarRolModal" (click)="onSelectRol(rol)">Editar</button> &nbsp;
                <button class="btn btn-outline-success" data-toggle="modal" data-target="#agregarAreaRol" (click)="getRolesAreas(rol)">Agregar area</button> &nbsp; 
-               <button class="btn btn-outline-danger" data-toggle="modal" data-target="#quitarAreaRol" (click)="getRolesAreas(rol)">Quitar area</button></td>
+               <button class="btn btn-outline-danger" data-toggle="modal" data-target="#quitarAreaRol" (click)="getRolesAreas(rol)">Quitar area</button> &nbsp; 
+               <button class="btn btn-outline-danger" (click)="onDeleteRol(rol)">Eliminar rol</button>
+              </td>
           </tr>
         </tbody>
       </table>
@@ -314,6 +317,53 @@
           <span aria-hidden="true">&times;</span>
         </button></li>
       </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Crear rol</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <!--<form [formGroup]="sensorAreaForm"  (ngSubmit)="createSensorArea()" >
+          <select class="custom-select" (change)=" onSelectSensorRegistrado($event)" formControlName="sensor_id">
+            <option>Seleccione sensor...</option>
+            <option *ngFor="let sensor of sensoresRegistrados" [value]="sensor.id" >
+              {{ sensor.nombre }}
+            </option>
+          </select>
+          <div class="modal-footer">
+              <button type="submit" class="btn btn-outline-success" >Agregar</button>
+          </div>
+          </form>-->
+          <form [formGroup]="newRolForm"  (ngSubmit)="createRol()">
+            <div class="form-group">
+              <label for="inputAddress2">Nombre del rol</label>
+              <input
+                  autocomplete="off"
+                  type="text"
+                  class="form-control"
+                  id="inputRol"
+                  autofocus
+                  formControlName="nombre"
+                  [class.is-invalid]="nombreRolNewValidate"
+                 
+              />
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-lg btn-block btn-outline-success">
+                    Registrar
+                </button>
+                </div>
+          </form>
       </div>
     </div>
   </div>

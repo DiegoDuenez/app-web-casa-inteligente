@@ -33,6 +33,8 @@ export class GestionHogarComponent implements OnInit {
   rol!: Rol;
   rolArea!: RolArea;
 
+  newRol!: Rol;
+
   idArea!: Number;
   nombreArea!: String;
 
@@ -50,6 +52,7 @@ export class GestionHogarComponent implements OnInit {
   sensorRegForm!:FormGroup;
   rolForm!: FormGroup;
   rolAgregarAreaForm!: FormGroup;
+  newRolForm!: FormGroup;
 
   idAreaRol!:Number;
   idUserRol!: Number;
@@ -64,7 +67,8 @@ export class GestionHogarComponent implements OnInit {
       this.updSensorTipoForm(), 
       this.updSensorRegForm(), 
       this.updRolForm(),
-      this.agregarRolAreaForm()
+      this.agregarRolAreaForm(),
+      this.createRolForm()
     }
 
   ngOnInit(): void {
@@ -477,6 +481,63 @@ export class GestionHogarComponent implements OnInit {
       }
     );
   }
+
+  createRol(): void {
+    if (this.newRolForm.invalid) {
+      return Object.values(this.newRolForm.controls).forEach((control) => {
+        control.markAsTouched();
+      });
+    } else {
+      
+      this.setRolNew();
+      this.authService.postRol(this.newRol).subscribe((data:any)=>{
+        console.log(data)
+        this.getRoles()
+        
+      })
+
+    }
+  }
+
+  get nombreRolNewValidate() {
+    return (
+      this.newRolForm.get('nombre')?.invalid &&
+      this.newRolForm.get('nombre')?.touched
+    );
+  }
+
+  createRolForm(): void {
+    this.newRolForm = this.fb.group({
+      nombre: ['', [Validators.required]]
+    });
+  }
+
+  setRolNew(): void {
+    this.newRol = {
+      id: this.newRolForm.get('id')?.value,
+      nombre: this.newRolForm.get('nombre')?.value
+
+    };
+  }
+
+  onDeleteRol(rol: Rol) {
+    //this.deleteEstacion = estacion;
+    let index = this.roles.findIndex( e => e.id == rol.id );
+    if(index !== -1){
+      this.roles.splice(index, 1);
+    }
+    
+    this.authService.deleteRol(rol.id).subscribe(
+      (data: any) => {
+        console.log(data)
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  
 
 
 

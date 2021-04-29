@@ -21,6 +21,7 @@ import { NgxQRCodeModule} from '@techiediaries/ngx-qrcode';
 import { AuthInterceptorService } from './services/auth/auth-interceptor.service';
 import { InfoAreaComponent } from './components/info-area/info-area.component';
 import { GestionHogarComponent } from './components/gestion-hogar/gestion-hogar.component';
+import { CentroAyudaComponent } from './components/centro-ayuda/centro-ayuda.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { GestionHogarComponent } from './components/gestion-hogar/gestion-hogar.
     UsuariosVerComponent,
     UsuariosCrearComponent,
     InfoAreaComponent,
-    GestionHogarComponent
+    GestionHogarComponent,
+    CentroAyudaComponent
   ],
   imports: [
     NgxQRCodeModule,

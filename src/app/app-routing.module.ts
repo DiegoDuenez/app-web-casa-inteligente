@@ -12,7 +12,7 @@ import { UsuariosCrearComponent } from './components/usuarios-crear/usuarios-cre
 import { InfoAreaComponent } from './components/info-area/info-area.component';
 import { GestionHogarComponent } from './components/gestion-hogar/gestion-hogar.component';
 import { AuthGuard } from './guards/auth.guard';
-
+import { CentroAyudaComponent } from './components/centro-ayuda/centro-ayuda.component';
 
 const routes: Routes = [
   {path: 'login', component: FormLoginComponent},
@@ -26,6 +26,7 @@ const routes: Routes = [
   {path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard]},
   {path: 'informacion/area/:id', component: InfoAreaComponent, canActivate: [AuthGuard]},
   {path: 'gestion', component: GestionHogarComponent, canActivate: [AuthGuard]},
+  {path: 'centroayuda', component: CentroAyudaComponent, canActivate: [AuthGuard]},
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   { path: '**', redirectTo: 'login' }
 ];

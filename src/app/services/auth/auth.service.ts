@@ -64,7 +64,9 @@ export class AuthService {
     }
   }
 
- 
+  postRol(rol: Rol){
+    return this.httpClient.post(`${this.apiURL}/crear/roles`,rol)
+  }
 
   postUser(user: User){
     return this.httpClient.post(`${this.apiURL}/registro`, user)
@@ -76,6 +78,10 @@ export class AuthService {
 
   updateRol(rol: Rol ,id: Number){
     return this.httpClient.put(`${this.apiURL}/editar/rol/` + id, rol)
+  }
+
+  deleteRol(id: Number){
+    return this.httpClient.delete(`${this.apiURL}/eliminar/rol/` + id)
   }
 
 

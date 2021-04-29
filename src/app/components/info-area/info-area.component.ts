@@ -10,7 +10,7 @@ import { SensorService } from 'src/app/services/sensor/sensor.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiediaries/ngx-qrcode';
 import { interval, Observable } from "rxjs";
-const Ws = require('@adonisjs/websocket-client');
+//const Ws = require('@adonisjs/websocket-client');
 
 
 @Component({

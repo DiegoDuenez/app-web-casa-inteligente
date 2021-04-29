@@ -91,6 +91,20 @@ export class UsuariosCrearComponent implements OnInit {
     );
   }
 
+  get emailValidate() {
+    return (
+      this.userForm.get('email')?.invalid &&
+      this.userForm.get('email')?.touched
+    );
+  }
+
+  get passwordValidate() {
+    return (
+      this.userForm.get('password')?.invalid &&
+      this.userForm.get('password')?.touched
+    );
+  }
+
   get rolValidate(){
     return(
       this.userForm.get('rol_id')?.invalid &&
@@ -101,6 +115,8 @@ export class UsuariosCrearComponent implements OnInit {
   createForm(): void {
     this.userForm = this.fb.group({
       nombre: ['', [Validators.required]],
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required]],
       rol_id: ['', [Validators.required]]
     });
   }

@@ -156,7 +156,7 @@ export class RegistroSensorComponent implements OnInit {
       
      // this.sensor_tipo = data
      this.sensor_tipo = data.sensor_tipo[0]
-     if(this.sensor_tipo.nombre == "pir" || this.sensor_tipo.nombre == "led"){
+     if(this.sensor_tipo.nombre == "pir" || this.sensor_tipo.nombre == "led" || this.sensor_tipo.nombre == "humedad" || this.sensor_tipo.nombre == "temperatura"){
        this.unPin = true;
        this.dosPin = false;
      }

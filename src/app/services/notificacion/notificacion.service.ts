@@ -33,5 +33,9 @@ export class NotificacionService {
     return this.httpClient.get(`${this.apiURL}/mostrar/cantidad/notificaciones`)
   }
 
+  delete(nombre: String){
+    return this.httpClient.delete(`${this.apiURL}/eliminar/notificacion/`+nombre)
+  }
+
 
 }

@@ -3,6 +3,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { User } from '../../models/user';
+import {webSocket } from 'rxjs/webSocket';
+import Ws from '@adonisjs/websocket-client';
+
+
+//var Ws = require('@adonisjs/websocket-client');
 
 
 @Component({
@@ -13,8 +18,17 @@ import { User } from '../../models/user';
 export class FormLoginComponent implements OnInit {
 
   loginForm!: FormGroup;
+  solicitaForm!: FormGroup;
   user!: User;
   spinner: Boolean = false;
+
+  sendNotificacion: Boolean = false;
+
+  
+  
+  message = ""
+  channel!: any;
+  messages: string[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -22,11 +36,34 @@ export class FormLoginComponent implements OnInit {
     private router: Router
   ) {
     this.createForm();
+    this.solicitarForm();
+  }
+  ngOnInit(): void {
+    const ws = Ws("ws://192.168.1.68", {
+    path: "ws"})
+
+    ws.connect()
+
+    this.channel = ws.subscribe("notificaciones");
+  
+    console.log(this.channel)
+    
+    this.channel.on("message", (data: any) => {
+     this.messages.push(data);
+
+    });
+
   }
 
-  ngOnInit(): void {
-    
-  }
+  sendCall() {
+    this.channel.emit("message", {
+        nombre_autor: this.message,
+        titulo: "PETICIÓN DE REGISTRO",
+        contenido: "unirse al hogas"
+    });
+
+    this.messages.push(this.message);
+}
 
   login(): void {
     if (this.loginForm.invalid) {
@@ -42,11 +79,8 @@ export class FormLoginComponent implements OnInit {
           
           const token = data.token.token;
           localStorage.setItem('token', token);
-
-         
           this.router.navigate(['/perfil']);
           this.spinner = false;
-          
           
         },
         (error) => {
@@ -88,6 +122,40 @@ export class FormLoginComponent implements OnInit {
       rol_nombre: this.loginForm.get('rol_nombre')?.value,
 
     };
+  }
+
+
+
+  sendSocket(): void {
+    if (this.solicitaForm.invalid) {
+      return Object.values(this.solicitaForm.controls).forEach((control) => {
+        control.markAsTouched();
+      });
+    } else {
+      this.sendNotificacion = true;
+      this.channel.emit("message", {
+        nombre_autor: this.solicitaForm.get('nombre_autor')?.value,
+        titulo: "PETICIÓN DE REGISTRO",
+        contenido: "unirse al hogar"
+    });
+
+    this.messages.push(this.message);
+      
+    }
+  }
+
+  get nombreAutorValidate() {
+    return (
+      this.solicitaForm.get('nombre_autor')?.invalid &&
+      this.solicitaForm.get('nombre_autor')?.touched
+    );
+  }
+
+
+  solicitarForm(): void {
+    this.solicitaForm = this.fb.group({
+      nombre_autor: ['', [Validators.required]]
+    });
   }
 
   

@@ -50,4 +50,20 @@ export class PerfilComponent implements OnInit {
    
   }
 
+  onDeleteNotificacion(n: Notificacion) {
+    //this.deleteEstacion = estacion;
+    let index = this.notificaciones.findIndex( e => e.nombre_autor == n.nombre_autor );
+    if(index !== -1){
+      this.notificaciones.splice(index, 1);
+    }
+    this.notService.delete(n.nombre_autor).subscribe(
+      (data: any) => {
+        console.log(data)
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
 }

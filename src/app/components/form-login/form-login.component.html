@@ -33,10 +33,13 @@
           Iniciar sesion
         </button>
       </div>
-      
+      <div align="center">
+        <a data-toggle="modal" data-target="#solicitarCuentaModal" class="text-info">Solicita una cuenta </a>
+      </div>
+  
       
     </form>
-
+    
     <div class="cargando" align="center" *ngIf="spinner == true">
       <div class="spinner-grow text-info" role="status">
         <span class="sr-only">Loading...</span>
@@ -48,5 +51,47 @@
         <span class="sr-only">Loading...</span>
       </div>
     </div>
-
   </div>
+
+
+  <!-- Modal -->
+<div class="modal fade" id="solicitarCuentaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Solicita una cuenta</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="solicitaForm" (ngSubmit)="sendSocket()">
+          <div class="form-group">
+            <label for="inputAddress2">Ingresa tu nombre</label>
+            <input
+              autocomplete="off"
+              type="text"
+              class="form-control"
+              id="inputAddress2"
+              formControlName="nombre_autor"
+            [class.is-invalid]="nombreAutorValidate"
+            />
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-lg btn-block btn-outline-success">
+                Solicitar
+              </button>
+              <div *ngIf="sendNotificacion == true" >
+                <br>
+                <p class="text-info" align="center">(Espera a que el administrador cree una cuenta para ti)</p>
+              </div>
+            </div>
+            
+          </form>
+      </div>
+      <div class="modal-footer">
+        <!--<button type="submit" class="btn btn-outline-success" (click)="refreshDataHistorial()">Refrescar</button>-->
+    </div>
+    </div>
+  </div>
+</div>

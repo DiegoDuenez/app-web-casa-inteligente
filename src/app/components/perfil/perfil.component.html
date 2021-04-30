@@ -30,10 +30,10 @@
     <div class="m-auto p-top-20" *ngIf="idRol === 1">
         <a class="display-inline-b" routerLink="/gestion"><img src="../../../assets/icon-blue-home.png" width="30" height="35">&nbsp; Gestión del Hogar</a>
     </div>
-    <div class="m-auto p-top-20">
+    <!--<div class="m-auto p-top-20">
         <a class="display-inline-b" routerLink="/centroayuda"><img src="../../../assets/icon-blue-book.png" width="30" height="30">&nbsp; Centro de Ayuda</a>
-    </div>
-    <div class="m-auto p-top-20">
+    </div>-->
+    <div class="m-auto p-top-20" *ngIf="idRol === 1">
         <a class="display-inline-b" data-toggle="modal" data-target="#notiModal" (click)="getNotificaciones()"><img src="../../../assets/notificacion.png" width="30" height="30">&nbsp; Notificaciónes <span *ngIf="cantidad > 0" class="badge badge-primary badge-pill bg-danger">{{cantidad}}</span></a>
     </div>
     <!--<div class="m-auto p-top-20">
@@ -59,8 +59,8 @@
             <ul class="list-group">
                 <li class="list-group-item list-group-item-info" *ngFor="let n of notificaciones">
                     {{n.titulo}} <br> El usuario {{n.nombre_autor}} quiere {{n.contenido}} <br> <br>
-                     <a routerLink="/usuarios/crear" class="btn btn-success text-white btn-sm">Aceptar</a> &nbsp;
-                     <button type="button" class="btn btn-danger btn-sm">Rechazar</button>
+                    <button type="button" class="close text-danger"(click)="onDeleteNotificacion(n)" ><span aria-hidden="true" (click)="onDeleteNotificacion(n)">&times;</span></button>
+                        
                 </li>
             </ul>
         <div class="modal-footer">

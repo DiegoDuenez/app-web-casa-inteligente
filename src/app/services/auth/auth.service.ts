@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, throwError } from 'rxjs';
+import { retry, catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment.prod';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../../models/user'
@@ -27,7 +28,10 @@ export class AuthService {
   }
 
   login(user: User): Observable<any> {
-    return this.httpClient.post(`${this.apiURL}/login`, user);
+    return this.httpClient.post(`${this.apiURL}/login`, user).pipe(
+      retry(1),
+      catchError(this.handleError)
+  );
   }
 
   loggedIn(){
@@ -83,6 +87,20 @@ export class AuthService {
   deleteRol(id: Number){
     return this.httpClient.delete(`${this.apiURL}/eliminar/rol/` + id)
   }
+
+
+  handleError(error:any) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+        // client-side error
+        errorMessage = `Error: ${error.error.message}`;
+    } else {
+        // server-side error
+        errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    /*console.log(errorMessage);*/
+    return throwError(errorMessage);
+}
 
 
 

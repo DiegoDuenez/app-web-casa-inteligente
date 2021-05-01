@@ -33,9 +33,7 @@ export class RegistroHabitacionComponent implements OnInit {
       this.areaService.post(this.area).subscribe(
         (data: any) => {
           //this.router.navigate(['/perfil']);
-          this.alert = true;
-          console.log(data)
-          
+          this.alert = true;     
           
         },
         (error) => {

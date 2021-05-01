@@ -45,9 +45,7 @@ export class FormLoginComponent implements OnInit {
     ws.connect()
 
     this.channel = ws.subscribe("notificaciones");
-  
-    console.log(this.channel)
-    
+
     this.channel.on("message", (data: any) => {
      this.messages.push(data);
 

@@ -23,7 +23,6 @@ export class UsuariosVerComponent implements OnInit {
   getUsuarios(){
     this.authService.getUsuarios().subscribe((data: any) =>{
       this.usuarios = data.usuarios
-      console.log(data.usuarios)
       
     })
   }
@@ -32,7 +31,6 @@ export class UsuariosVerComponent implements OnInit {
     this.authService.getPerfil().subscribe((data:any)=>{
       this.idUser = data.id
       this.idRol = data.rol_id
-      console.log(data)
     })
   }
 
@@ -45,7 +43,6 @@ export class UsuariosVerComponent implements OnInit {
      
      this.authService.deleteUser(user.id).subscribe(
        (data: any) => {
-         console.log("endpoint ", data)
        },
        (error) => {
          console.log(error);

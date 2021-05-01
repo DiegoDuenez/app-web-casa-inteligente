@@ -42,14 +42,14 @@ export class RegistroSensorComponent implements OnInit {
   getAreas(){
     this.areaService.get().subscribe((data: any) =>{
       this.areas = data.areas
-      console.log(this.areas)
+    
     })
   }
 
   getSensoresTipos(){
     this.sensorService.getTipos().subscribe((data:any) =>{
       this.sensores_tipos = data.sensores_tipos
-      console.log(this.sensores_tipos)
+      
     })
   }
 
@@ -64,7 +64,6 @@ export class RegistroSensorComponent implements OnInit {
         (data: any) => {
           //this.router.navigate(['/perfil']);
           this.alert = true;
-          console.log(data)
 
           if(data[0].message ==  "unique validation failed on pin_1"){
             this.pinRepeat = true;
@@ -165,7 +164,6 @@ export class RegistroSensorComponent implements OnInit {
       this.dosPin = true;
      }
 
-     console.log(this.sensor_tipo.id)
 
     }, error =>{
       console.log(error)

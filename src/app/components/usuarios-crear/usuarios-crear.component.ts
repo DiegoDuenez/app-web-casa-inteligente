@@ -41,7 +41,6 @@ export class UsuariosCrearComponent implements OnInit {
   getRoles(){
     this.authService.getRoles().subscribe((data:any)=>{
       this.roles = data.roles
-      console.log(data)
     })
   }
 
@@ -58,7 +57,6 @@ export class UsuariosCrearComponent implements OnInit {
         (data: any) => {
           //this.router.navigate(['/perfil']);
           this.alert = true;
-          console.log(data)
           /*if (data[0].message){
             this.alertModalQR = false;
           }

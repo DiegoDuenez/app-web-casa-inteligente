@@ -29,7 +29,6 @@ export class PerfilComponent implements OnInit {
     this.authService.getPerfil().subscribe((data: any)=>{
       this.nombre = data.nombre
       this.idRol = data.rol_id
-      console.log(data.rol_id)
     })
 
     /*this.notService.getCantidad().subscribe((data:any)=>{
@@ -58,7 +57,7 @@ export class PerfilComponent implements OnInit {
     }
     this.notService.delete(n.nombre_autor).subscribe(
       (data: any) => {
-        console.log(data)
+      
       },
       (error) => {
         console.log(error);

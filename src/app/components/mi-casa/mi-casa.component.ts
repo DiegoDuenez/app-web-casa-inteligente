@@ -39,10 +39,10 @@ export class MiCasaComponent implements OnInit {
   getUserAreas(){
     this.authService.getPerfil().subscribe((data: any)=>{
       this.idUser = data.id
-      console.log(this.idUser)
+     
       this.areaService.getUsersAreas(this.idUser).subscribe((data:any)=>{
         this.areas = data.usuario_areas
-        console.log(this.areas)
+        
       })
     })
   }
@@ -52,7 +52,7 @@ export class MiCasaComponent implements OnInit {
   this.idArea = area.id
     this.areaService.get(this.idArea).subscribe((data:any)=>{
       this.router.navigate(['/informacion/area/' + this.idArea]);
-      console.log(data)
+     
     })
 
   }

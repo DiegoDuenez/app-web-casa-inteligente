@@ -79,7 +79,6 @@ export class GestionHogarComponent implements OnInit {
   getPerfil(){
     this.authService.getPerfil().subscribe((data:any)=>{
       this.idUserRol = data.rol_id
-      console.log(this.idUserRol)
     })
   }
 
@@ -94,8 +93,6 @@ export class GestionHogarComponent implements OnInit {
       this.areaService.update(this.area, this.idArea).subscribe(
         (data: any) => {
           //this.router.navigate(['/perfil']);
-          
-          console.log(data)
           this.getHabitaciones()
          
           //this.router.navigate(['/perfil']);
@@ -136,7 +133,6 @@ export class GestionHogarComponent implements OnInit {
       this.habitacionTable = false;
       this.sensorTable = false;
       this.rolTable = true;
-      console.log(data)
     })
   }
 
@@ -146,14 +142,13 @@ export class GestionHogarComponent implements OnInit {
       this.rolTable = false;
       this.sensorTable = false;
       this.habitacionTable = true;
-      console.log(data)
     })
   }
 
   getHabitacionesRol(){
     this.areaService.get().subscribe((data:any)=>{
       this.habitaciones = data.areas
-      console.log(data)
+      
     })
   }
 
@@ -169,7 +164,7 @@ export class GestionHogarComponent implements OnInit {
         this.sensores_tipos = data.sensores_tipos
         this.sensorReg = false;
         this.sensorTipos = true;
-        console.log(this.sensores_tipos)
+        
       })
     }
     else if (event.target.value == 2){
@@ -177,7 +172,7 @@ export class GestionHogarComponent implements OnInit {
         this.sensores_registrados = data.sensores_registrados
         this.sensorTipos = false;
         this.sensorReg = true;
-        console.log(this.sensores_registrados)
+        
 
       })
     }
@@ -188,7 +183,7 @@ export class GestionHogarComponent implements OnInit {
     this.idArea = area.id
     this.nombreArea = area.nombre
     this.areaService.get(area.id).subscribe((data: any)=>{
-      console.log(this.idArea)
+     
     })
   }
 
@@ -202,10 +197,10 @@ export class GestionHogarComponent implements OnInit {
     
     this.areaService.deleteArea(area.id).subscribe(
       (data: any) => {
-        console.log(data)
+        
       },
       (error) => {
-        console.log(error);
+        
       }
     );
   }
@@ -218,7 +213,7 @@ export class GestionHogarComponent implements OnInit {
     this.idSensorTipo = sensor.id
     this.nombreSensorTipo = sensor.nombre
     this.sensorService.getTipos(sensor.id).subscribe((data: any)=>{
-      console.log(data)
+      
     })
   }
 
@@ -232,11 +227,11 @@ export class GestionHogarComponent implements OnInit {
       
       this.setSensorTipo();
       this.sensorService.updateSensorTipo(this.sensorTipo, this.idSensorTipo).subscribe((data:any)=>{
-        console.log(data)
+       
         
           this.sensorService.getTipos().subscribe((data:any) =>{
             this.sensores_tipos = data.sensores_tipos
-            console.log(this.sensores_tipos)
+            
           })
         
       })
@@ -277,7 +272,7 @@ export class GestionHogarComponent implements OnInit {
     this.idSensorReg= sensor.id
     this.nombreSensorReg = sensor.nombre
     this.sensorService.getRegistrados(sensor.id).subscribe((data: any)=>{
-      console.log(data)
+      
     })
   }
 
@@ -291,13 +286,9 @@ export class GestionHogarComponent implements OnInit {
       
       this.setSensorReg();
       this.sensorService.updateSensorReg(this.sensorRegistrado, this.idSensorReg).subscribe((data:any)=>{
-        console.log(data)
-        
-    
           this.sensorService.getRegistrados().subscribe((data:any)=>{
             this.sensores_registrados = data.sensores_registrados
-            console.log(this.sensores_registrados)
-    
+
           })
         
       })
@@ -339,10 +330,10 @@ export class GestionHogarComponent implements OnInit {
     
     this.sensorService.deleteSensoresReg(sensor.id).subscribe(
       (data: any) => {
-        console.log(data)
+       
       },
       (error) => {
-        console.log(error);
+      
       }
     );
   }
@@ -354,7 +345,7 @@ export class GestionHogarComponent implements OnInit {
     this.idRol = rol.id
     this.nombreRol = rol.nombre
     this.authService.getRoles(rol.id).subscribe((data: any)=>{
-      console.log(data)
+      
     })
   }
 
@@ -368,9 +359,7 @@ export class GestionHogarComponent implements OnInit {
       
       this.setRol();
       this.authService.updateRol(this.rol, this.idRol).subscribe((data:any)=>{
-        console.log(data)
-        
-    
+
           this.getRoles()
         
       })
@@ -404,7 +393,7 @@ export class GestionHogarComponent implements OnInit {
   onSelectArea(event: any){
     this.idAreaRol = event.target.value
     this.areaService.get(this.idAreaRol).subscribe((data:any)=>{
-      console.log(data.area)
+      
     })
     
   }
@@ -412,11 +401,11 @@ export class GestionHogarComponent implements OnInit {
   getRolesAreas(rol: Rol){
     this.idRol = rol.id
     this.authService.getRoles(rol.id).subscribe((data: any)=>{
-      console.log(data)
+     
     })
     this.areaService.getRolesAreas(this.idRol).subscribe((data:any)=>{
       this.rolesAreas = data.rol_areas
-      console.log(data.rol_areas)
+      
     })
 
   }
@@ -430,12 +419,10 @@ export class GestionHogarComponent implements OnInit {
       
       this.setRolArea();
       this.areaService.postRolAreas(this.rolArea).subscribe((data:any)=>{
-        console.log(data)
-        
-    
+  
         this.areaService.getRolesAreas(this.idRol).subscribe((data:any)=>{
           this.rolesAreas = data.rol_areas
-          console.log(data.rol_areas)
+       
         })
         
       })
@@ -470,14 +457,14 @@ export class GestionHogarComponent implements OnInit {
     
     this.areaService.deleteRolAreas(this.idRol, rolArea.area_id).subscribe(
       (data: any) => {
-        console.log(data)
+
         this.areaService.getRolesAreas(this.idRol).subscribe((data:any)=>{
           this.rolesAreas = data.rol_areas
-          console.log(data.rol_areas)
+          
         })
       },
       (error) => {
-        console.log(error);
+       
       }
     );
   }
@@ -491,7 +478,6 @@ export class GestionHogarComponent implements OnInit {
       
       this.setRolNew();
       this.authService.postRol(this.newRol).subscribe((data:any)=>{
-        console.log(data)
         this.getRoles()
         
       })
@@ -529,10 +515,10 @@ export class GestionHogarComponent implements OnInit {
     
     this.authService.deleteRol(rol.id).subscribe(
       (data: any) => {
-        console.log(data)
+      
       },
       (error) => {
-        console.log(error);
+        
       }
     );
   }

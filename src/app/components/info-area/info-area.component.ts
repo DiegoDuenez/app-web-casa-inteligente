@@ -60,15 +60,12 @@ export class InfoAreaComponent implements OnInit {
 
     this.secondsCounter = interval(1000);
 
-   
-
-
     this.idAreaParam = this.route.snapshot.params['id'];
     this.value = this.idAreaParam
     this.x = this.idAreaParam
     this.areaService.get(this.idAreaParam).subscribe((data: any)=>{
       this.areaNombre = data.area.nombre
-      console.log(this.areaNombre)
+     
     })
 
     this.getPerfil()
@@ -92,14 +89,14 @@ export class InfoAreaComponent implements OnInit {
   getSensoresRegistrados(){
     this.sensorService.getRegistrados().subscribe((data:any)=>{
       this.sensoresRegistrados = data.sensores_registrados
-      console.log(this.sensoresRegistrados)
+      
     })
   }
 
   getSensoresArea(){
     this.areaService.getSensoresArea(this.idAreaParam).subscribe((data:any)=>{
       this.sensores = data.sensores_area
-      console.log(data.sensores_area)
+      
       
     })
   }
@@ -108,9 +105,9 @@ export class InfoAreaComponent implements OnInit {
 
     this.idSensorRegistrado = event.target.value;
     this.sensorService.getRegistrados(this.idSensorRegistrado).subscribe((data: any) => {
-     console.log(this.idAreaParam)
+    
      this.sensorRegistrado = data.sensor_registrado[0]
-     console.log(this.sensorRegistrado.id)
+     
 
     }, error =>{
       console.log(error)
@@ -129,7 +126,7 @@ export class InfoAreaComponent implements OnInit {
       this.sensorService.postSensorArea(this.sensorArea).subscribe(
         (data: any) => {
          this.getSensoresArea()
-          console.log("agregado", data)
+        
         },
         (error) => {
           console.log(error)
@@ -166,17 +163,15 @@ export class InfoAreaComponent implements OnInit {
   getUserAreas(){
     this.authService.getPerfil().subscribe((data: any)=>{
       this.idUser = data.id
-      console.log(this.idUser)
+      
       this.areaService.getUsersAreas(this.idUser).subscribe((data:any)=>{
         this.areas = data.usuario_areas
-        console.log(this.areas)
+  
 
         for(var i = 0; i < this.areas.length; i++){
-          console.log(this.areas[i])
           if(this.x == this.areas[i].id){
             console.log("acceso")
             this.alert = false;
-
           }
           
         }
@@ -223,7 +218,7 @@ export class InfoAreaComponent implements OnInit {
 
   refreshDataHistorial(){
     this.sensorService.getHistorialSensor(this.idSensorHistorial).subscribe((data:any)=>{
-      console.log(this.historial)
+    
     })
   }
   
@@ -236,7 +231,7 @@ export class InfoAreaComponent implements OnInit {
     
     this.sensorService.deleteSensoresAreas(sensor.id).subscribe(
       (data: any) => {
-        console.log("endpoint ", data)
+        
       },
       (error) => {
         console.log(error);

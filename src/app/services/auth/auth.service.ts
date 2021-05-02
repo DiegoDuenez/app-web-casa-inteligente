@@ -28,10 +28,7 @@ export class AuthService {
   }
 
   login(user: User): Observable<any> {
-    return this.httpClient.post(`${this.apiURL}/login`, user).pipe(
-      retry(1),
-      catchError(this.handleError)
-  );
+    return this.httpClient.post(`${this.apiURL}/login`, user)
   }
 
   loggedIn(){
@@ -89,7 +86,7 @@ export class AuthService {
   }
 
 
-  handleError(error:any) {
+  /*handleError(error:any) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
         // client-side error
@@ -98,9 +95,9 @@ export class AuthService {
         // server-side error
         errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    /*console.log(errorMessage);*/
+    console.log(errorMessage);
     return throwError(errorMessage);
-}
+}*/
 
 
 

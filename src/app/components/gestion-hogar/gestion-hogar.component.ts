@@ -6,7 +6,8 @@ import { Area} from '../../models/area';
 import { Sensor } from '../../models/sensor';
 import { AreaService } from 'src/app/services/area/area.service';
 import { SensorService } from '../../services/sensor/sensor.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SensorTipo } from 'src/app/models/sensor-tipo';
 import { Router } from '@angular/router';
 
 @Component({
@@ -34,6 +35,7 @@ export class GestionHogarComponent implements OnInit {
   rolArea!: RolArea;
 
   newRol!: Rol;
+  newSensorTipo!: SensorTipo;
 
   idArea!: Number;
   nombreArea!: String;
@@ -53,6 +55,7 @@ export class GestionHogarComponent implements OnInit {
   rolForm!: FormGroup;
   rolAgregarAreaForm!: FormGroup;
   newRolForm!: FormGroup;
+  newSensorTipoForm!: FormGroup;
 
   idAreaRol!:Number;
   idUserRol!: Number;
@@ -68,7 +71,8 @@ export class GestionHogarComponent implements OnInit {
       this.updSensorRegForm(), 
       this.updRolForm(),
       this.agregarRolAreaForm(),
-      this.createRolForm()
+      this.createRolForm(),
+      this.createSensorTipoForm()
     }
 
   ngOnInit(): void {
@@ -176,7 +180,7 @@ export class GestionHogarComponent implements OnInit {
 
       })
     }
-    console.log(event.target.value)
+    
   }
 
   onSelectHabitacion(area: Area){
@@ -521,6 +525,50 @@ export class GestionHogarComponent implements OnInit {
         
       }
     );
+  }
+
+
+
+  createSensorTipo(): void {
+    if (this.newSensorTipoForm.invalid) {
+      return Object.values(this.newSensorTipoForm.controls).forEach((control) => {
+        control.markAsTouched();
+      });
+    } else {
+      
+      this.setSensorTipoNew();
+      this.sensorService.postSensorTipo(this.newSensorTipo).subscribe((data:any)=>{
+        this.sensorService.getTipos().subscribe((data:any) =>{
+          this.sensores_tipos = data.sensores_tipos
+          this.sensorReg = false;
+          this.sensorTipos = true;
+          
+        })
+        
+      })
+
+    }
+  }
+
+  get nombreSensorTipoNewValidate() {
+    return (
+      this.newSensorTipoForm.get('nombre')?.invalid &&
+      this.newSensorTipoForm.get('nombre')?.touched
+    );
+  }
+
+  createSensorTipoForm(): void {
+    this.newSensorTipoForm = this.fb.group({
+      nombre: ['', [Validators.required]]
+    });
+  }
+
+  setSensorTipoNew(): void {
+    this.newSensorTipo = {
+      id: this.newSensorTipoForm.get('id')?.value,
+      nombre: this.newSensorTipoForm.get('nombre')?.value
+
+    };
   }
 
   

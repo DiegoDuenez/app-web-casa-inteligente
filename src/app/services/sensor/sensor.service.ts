@@ -7,6 +7,7 @@ import { Sensor } from '../../models/sensor'
 import { Area } from 'src/app/models/area';
 import { HistorialSensor } from 'src/app/models/historial-sensor';
 import { SensorArea } from 'src/app/models/sensor-area';
+import { SensorTipo } from 'src/app/models/sensor-tipo';
 
 @Injectable({
   providedIn: 'root'
@@ -77,6 +78,10 @@ export class SensorService {
 
   getHistorialMongo(data: any){
     return this.httpClient.post(`${this.apiURL}/crear/historial/sensores/`, data);
+  }
+
+  postSensorTipo(sensorTipo: SensorTipo){
+    return this.httpClient.post(`${this.apiURL}/crear/sensor/tipo`, sensorTipo);
   }
   
 

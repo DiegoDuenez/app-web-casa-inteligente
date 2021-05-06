@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { User } from '../../models/user';
 import {webSocket } from 'rxjs/webSocket';
-import Ws from '@adonisjs/websocket-client';
+import * as Ws from '@adonisjs/websocket-client';
 
 
 //var Ws = require('@adonisjs/websocket-client');
@@ -39,7 +39,7 @@ export class FormLoginComponent implements OnInit {
     this.solicitarForm();
   }
   ngOnInit(): void {
-    const ws = Ws("ws://192.168.1.68", {
+    const ws = Ws("ws://159.65.180.20", {
     path: "ws"})
 
     ws.connect()
@@ -57,7 +57,7 @@ export class FormLoginComponent implements OnInit {
     this.channel.emit("message", {
         nombre_autor: this.message,
         titulo: "PETICIÓN DE REGISTRO",
-        contenido: "unirse al hogas"
+        contenido: "unirse al hogar"
     });
 
     this.messages.push(this.message);

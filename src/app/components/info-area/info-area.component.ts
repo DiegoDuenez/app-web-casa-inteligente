@@ -38,7 +38,7 @@ export class InfoAreaComponent implements OnInit {
   area!: Area;
   x!: any;
   historial!: HistorialSensor[];
-  sensorNombre!: String;
+  sensorId!: Number;
   idSensorHistorial!: Number;
   nombreSensorHistorial!: String;
 
@@ -195,26 +195,24 @@ export class InfoAreaComponent implements OnInit {
 
   onSelectHistorialMongo(sensor: SensorArea){
     this.dataMongo = {
-      nombreSensor: sensor.sensor_nombre
+      sensor_id: sensor.sensor_id
     }
-    //this.nombreSensorHistorial = sensor.sensor_nombre;
-
     this.secondsCounter.subscribe(n =>
       this.sensorService.getHistorialMongo(this.dataMongo).subscribe((data:any)=>{
         this.historial = data.data
-        this.sensorNombre = sensor.sensor_nombre
+        this.sensorId = sensor.sensor_id
         //console.log("mongo ", this.historial)
-        
       })
     );
-
+    //this.nombreSensorHistorial = sensor.sensor_nombre;
+     // console.log(sensor.sensor_id)
     /*this.sensorService.getHistorialMongo(this.dataMongo).subscribe((data:any)=>{
       this.historial = data.data
       this.sensorNombre = sensor.sensor_nombre
       //console.log("mongo ", this.historial)
-      
     })*/
   }
+
 
   refreshDataHistorial(){
     this.sensorService.getHistorialSensor(this.idSensorHistorial).subscribe((data:any)=>{

@@ -39,7 +39,7 @@ export class FormLoginComponent implements OnInit {
     this.solicitarForm();
   }
   ngOnInit(): void {
-    const ws = Ws("ws://159.65.180.20", {
+    const ws = Ws("ws://159.65.180.20:3333", {
     path: "ws"})
 
     ws.connect()

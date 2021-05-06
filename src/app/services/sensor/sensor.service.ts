@@ -84,6 +84,9 @@ export class SensorService {
     return this.httpClient.post(`${this.apiURL}/crear/sensor/tipo`, sensorTipo);
   }
   
+  deleteHistorialSensor(id: Number){
+    return this.httpClient.delete(`${this.apiURL}/eliminar/historial/sensor/`+id);
+  }
 
  
 

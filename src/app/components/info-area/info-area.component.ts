@@ -237,5 +237,11 @@ export class InfoAreaComponent implements OnInit {
     );
   }
 
+  onDeleteSensorHistorial(){
+    this.sensorService.deleteHistorialSensor(this.sensorId).subscribe((data:any)=>{
+    })
+
+  }
+
 
 }
